@@ -3,6 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Animation from "../components/Animation";
+import Nav from "../components/Nav";
 
 const Home: NextPage = () => {
   return (
@@ -13,6 +14,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={"bg-background flex h-screen"}>
+        <Nav/>
         <Animation/> 
       </main>
     </>
