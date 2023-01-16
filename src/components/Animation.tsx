@@ -1,7 +1,4 @@
-import { CipherCCM, randomInt } from "crypto";
-import { disconnect } from "process";
 import { useEffect, useRef } from "react";
-import { map } from "zod";
 
 interface Circle {
   x: number;
@@ -85,6 +82,8 @@ const Animation = () => {
 
     context.scale(dpr * 2, dpr * 2);
     context.lineWidth = 0.5;
+    canvas.addEventListener("click", onClick, false);
+
 
     return () => {};
   }, []);
@@ -105,6 +104,27 @@ const Animation = () => {
     };
   }, []);
 
+  const onClick = (e: MouseEvent) => {
+
+    if (!e) {
+        return;
+    }
+    const x = e.clientX;
+    const y = e.clientY;
+
+    console.log(x, y);
+
+    circles.filter((circle) => {
+        const d = distance(x - 800, y - 200, circle.x, circle.y);
+
+        console.log(d);
+        if (d > 200) {
+            return true;
+        }
+        return false;
+    })
+  }
+
   const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
     if (done) return;
     const radius = 75;
@@ -118,15 +138,13 @@ const Animation = () => {
     ctx.stroke();
 
     const growMultiplier = 1;
-    let j = 0;
-    for (; j < (frameCount)/100; j += 1) {
-        if (frameCount % 2 == 0 || frameCount > 300) {
+    const interval = 40 * growMultiplier - Math.floor(frameCount / 10)
 
-            done = addCircle(radius);
-        }
+    if (frameCount % interval == 0 || interval < 1) {
+        done = addCircle(radius);
     }
 
-    console.log(j);
+
     circles.forEach((c) => {
       if (c.shouldGrow) {
         //check collision
@@ -144,7 +162,7 @@ const Animation = () => {
       }
 
       if (c.shouldGrow) {
-        c.r += (0.2 * growMultiplier) / Math.max(0.01 * c.r * c.r, 0.5);
+        c.r += (0.3 * growMultiplier) / Math.max(0.01 * c.r * c.r, 0.5);
       }
 
       ctx.beginPath();
@@ -152,7 +170,7 @@ const Animation = () => {
       ctx.stroke();
     });
   };
-  return <canvas style={{ height: "500px" }} ref={canvasRef} />;
+  return <canvas className={"mx-6"} style={{ width: "300px" , height: "300px"}} ref={canvasRef} />;
 };
 
 export default Animation;
