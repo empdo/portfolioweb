@@ -20,8 +20,8 @@ const Nav = () => {
   };
 
   return (
-    <nav className={"absolute top-0 flex w-screen flex-row px-10 pt-4 items-center"}>
-      <h1 className={"text-6xl font-medium text-white pb-2"}>&#120124;</h1>
+    <nav className={"absolute top-0 flex flex-row px-10 pt-4 items-center max-w-page w-full"}>
+      <h1 className={"text-6xl font-medium text-violet-400 pb-2"}>~</h1>
       <span className={"flex-grow"} />
       {showIcons ? (
         <div
@@ -65,7 +65,7 @@ const Nav = () => {
           <a className={"h-min"} href="">
             <h2 className={"text-3xl font-semibold text-white"}>About</h2>
           </a>
-          <a className={"h-min"} href="">
+          <a className={"h-min"} href="#projects">
             <h2 className={"pl-4 text-3xl font-semibold text-white"}>
               Projects
             </h2>

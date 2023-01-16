@@ -47,7 +47,6 @@ const addCircle = (radius: number) => {
     }
 
     if (i == maxIt) {
-      //TODO: wait 10sec, then remove every buble on some interval of
       return true;
     }
   }
@@ -73,8 +72,8 @@ const Animation = () => {
       return;
     }
 
-    var dpr = window.devicePixelRatio || 1;
-    var rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
     // Give the canvas pixel dimensions of their CSS
     // size * the device pixel ratio.
     canvas.width = rect.width * dpr;
@@ -98,31 +97,27 @@ const Animation = () => {
         }
       };
       render();
-    }, 20);
+    }, 10);
     return () => {
       clearInterval(interval);
     };
   }, []);
 
   const onClick = (e: MouseEvent) => {
-
-    if (!e) {
+    if (!e || !canvas) {
         return;
     }
-    const x = e.clientX;
-    const y = e.clientY;
+    const x = e.clientX - canvas.offsetLeft - canvas.clientLeft;
+    const y = e.clientY - canvas.offsetTop - canvas.clientTop;
 
-    console.log(x, y);
-
-    circles.filter((circle) => {
-        const d = distance(x - 800, y - 200, circle.x, circle.y);
-
-        console.log(d);
-        if (d > 200) {
-            return true;
-        }
-        return false;
+    circles = circles.filter((circle) => {
+        const d = distance(x, y, circle.x, circle.y);
+        
+        console.log(d > 50);
+        return d > 50;
     })
+
+    done = false;
   }
 
   const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
@@ -130,12 +125,8 @@ const Animation = () => {
     const radius = 75;
 
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    ctx.strokeStyle = "white";
-    ctx.beginPath();
 
-    //draw outercircle
-    ctx.arc(radius, radius, radius, 0, 2 * Math.PI);
-    ctx.stroke();
+    ctx.strokeStyle = "white";
 
     const growMultiplier = 1;
     const interval = 40 * growMultiplier - Math.floor(frameCount / 10)
@@ -143,7 +134,6 @@ const Animation = () => {
     if (frameCount % interval == 0 || interval < 1) {
         done = addCircle(radius);
     }
-
 
     circles.forEach((c) => {
       if (c.shouldGrow) {
