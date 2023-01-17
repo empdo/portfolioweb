@@ -74,6 +74,7 @@ const Animation = () => {
 
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
+
     // Give the canvas pixel dimensions of their CSS
     // size * the device pixel ratio.
     canvas.width = rect.width * dpr;
@@ -82,7 +83,6 @@ const Animation = () => {
     context.scale(dpr * 2, dpr * 2);
     context.lineWidth = 0.5;
     canvas.addEventListener("click", onClick, false);
-
 
     return () => {};
   }, []);
@@ -112,7 +112,7 @@ const Animation = () => {
 
     circles = circles.filter((circle) => {
         const d = distance(x, y, circle.x, circle.y);
-        
+
         return d > 50;
     })
 

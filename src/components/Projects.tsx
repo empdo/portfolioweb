@@ -1,8 +1,8 @@
 const Project = (props: { name: string; url: string; description: string }) => {
   return (
     <div className="flex min-h-md w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 to-gray-800 p-5 shadow-2xl">
-      <div className={"flex w-full flex-row items-center pb-6"}>
-        <h2 className={"text-3xl font-semibold text-white"}>{props.name}</h2>
+      <div className={"flex w-full flex-row items-center pb-3"}>
+        <h2 className={"text-3xl font-medium text-white"}>{props.name}</h2>
         <span className={"flex-grow"} />
         <a href={props.url} target="_blank">
           <svg
@@ -34,19 +34,19 @@ const Project = (props: { name: string; url: string; description: string }) => {
 
 const Projects = () => {
   return (
-    <div className={"flex flex-col content-center items-center"}>
-      <h1 className={"text-5xl font-bold text-white"} id="projects">
+    <div className={"flex flex-col content-center items-center min-w-screen"}>
+      <h1 className={"text-5xl font-bold text-white pb-12"} id="projects">
         My projects
       </h1>
       <div
         className={
-          "min-w-screen flex min-h-screen flex-wrap content-center items-center justify-center gap-12 p-10 pt-0"
+          " flex min-h-screen flex-wrap content-start items-center justify-center gap-12 p-10 pt-0"
         }
       >
         <Project
           name="MindGame"
           url="j"
-          description="some super cool project yeeyee  asdfasdfasdfasdfasdfasdfasdf"
+          description="some super cool project yeeyee  asdfasdfa sdfasd fasdfa sdfasdf"
         />
         <Project
           name="MindGame"
