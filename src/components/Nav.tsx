@@ -20,8 +20,31 @@ const Nav = () => {
   };
 
   return (
-    <nav className={"absolute top-0 flex flex-row px-10 pt-4 items-center max-w-page w-full"}>
-      <h1 className={"text-6xl font-medium text-violet-400 pb-2"}>~</h1>
+    <nav
+      className={
+        "absolute top-0 flex w-full max-w-page flex-row items-center px-10 pt-4"
+      }
+    >
+      <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
+        <span className={"flex-grow"}/>
+    <div className={"animate-fadein" + " flex flex-row items-center "}>
+      <a className={"h-min"} href="#projects">
+        <h2 className={"pl-4 text-3xl font-semibold text-white"}>Projects</h2>
+      </a>
+      <a className={"h-min"} href="">
+        <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
+      </a>
+    </div>
+    </nav>
+  );
+
+  return (
+    <nav
+      className={
+        "absolute top-0 flex w-full max-w-page flex-row items-center px-10 pt-4"
+      }
+    >
+      <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
       <span className={"flex-grow"} />
       {showIcons ? (
         <div
@@ -49,7 +72,7 @@ const Nav = () => {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 448 512"
             >
-              <path  d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+              <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
             </svg>
           </a>
         </div>
@@ -76,7 +99,9 @@ const Nav = () => {
         </div>
       )}
       <div
-        className={"ml-8 flex flex-col justify-center hover:cursor-pointer h-min"}
+        className={
+          "ml-8 flex h-min flex-col justify-center hover:cursor-pointer"
+        }
         onClick={() => {
           showIcons
             ? setIconAnimationState("animate-fadeout")

@@ -113,7 +113,6 @@ const Animation = () => {
     circles = circles.filter((circle) => {
         const d = distance(x, y, circle.x, circle.y);
         
-        console.log(d > 50);
         return d > 50;
     })
 

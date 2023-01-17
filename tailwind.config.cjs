@@ -12,7 +12,7 @@ module.exports = {
         sans: ['var(--font-inter)', ...fontFamily.sans],
       },
       minHeight: {
-        'md': '20rem',
+        'md': '15rem',
       },
       minWidth: {
         'lg': '32rem',
