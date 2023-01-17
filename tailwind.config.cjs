@@ -21,27 +21,39 @@ module.exports = {
         page
       },
       width: {
-        page
+        page,
+        200: '200%'
       },
       colors: {
-        background: '#201545'
+        background: '#201545',
       },
       keyframes: {
         fadeout: {
           '0%': { opacity: 1 },
-          '100%': { opacity: 0},
+          '100%': { opacity: 0 },
         },
         fadein: {
           '0%': { opacity: 0 },
           '100%': { opacity: 1 },
-        }, 
+        },
+        scrollbg: {
+          '0%': { 'background-position': 'left'},
+          '100%': { 'background-position': 'right'}
+        },
       },
-backgroundImage: {
+      invert: {
+        60: '0.60'
+      },
+      backgroundSize: {
+        "200%": "200%"
+      },
+      backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
       },
       animation: {
         fadein: "fadein 175ms linear forwards",
-        fadeout: "fadeout 175ms linear forwards"
+        fadeout: "fadeout 175ms linear forwards",
+        scrollbg: "scrollbg 75ms linear forwards"
       }
     },
   },

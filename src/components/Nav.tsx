@@ -22,19 +22,19 @@ const Nav = () => {
   return (
     <nav
       className={
-        "absolute top-0 flex w-full max-w-page flex-row items-center px-10 pt-4"
+        "absolute top-0 flex w-full flex-row items-center px-10 pt-4"
       }
     >
       <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
-        <span className={"flex-grow"}/>
-    <div className={"animate-fadein" + " flex flex-row items-center "}>
-      <a className={"h-min"} href="#projects">
-        <h2 className={"pl-4 text-3xl font-semibold text-white"}>Projects</h2>
-      </a>
-      <a className={"h-min"} href="">
-        <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
-      </a>
-    </div>
+      <span className={"flex-grow"} />
+      <div className={"animate-fadein" + " flex flex-row items-center "}>
+        <a className={"h-min"} href="#projects">
+          <h2 className={"pl-4 text-3xl font-semibold text-white"}>Projects</h2>
+        </a>
+        <a className={"h-min"} href="">
+          <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
+        </a>
+      </div>
     </nav>
   );
 

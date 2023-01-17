@@ -20,11 +20,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={"flex-col flex min-h-screen bg-gradient-to-r from-slate-900 to-gray-900"}>
-        <section className={"flex flex-col min-h-screen items-center justify-center"}>
+        <section className={"flex flex-col min-h-screen items-center justify-center max-w-page mx-auto"}>
           <Nav />
           <Header />
         </section>
-        <Projects />
+        <section className={"flex flex-col min-h-screen items-center justify-center max-w-page mx-auto"}>
+          <Projects />
+          </section> 
       </main>
     </div>
   );
