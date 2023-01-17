@@ -1,6 +1,6 @@
 const Project = (props: { name: string; url: string; description: string, tecs: string[] }) => {
   return (
-    <div className="flex min-h-md w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-600 p-5 shadow-2xl bg-200% hover:animate-scrollbg">
+    <div className="flex min-h-md w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg hover:via-pink-600 hover:to-violet-900">
       <div className={"flex w-full flex-row items-center pb-3"}>
         <h2 className={"text-2xl font-medium text-white"}>{props.name}</h2>
         <span className={"flex-grow"} />
