@@ -53,8 +53,7 @@ module.exports = {
       animation: {
         fadein: "fadein 175ms linear forwards",
         fadeout: "fadeout 175ms linear forwards",
-        scrollbg: "scrollbg 175ms linear forwards"
-      }
+        scrollbg: "scrollbg 180ms linear forwards" }
     },
   },
   plugins: [],
