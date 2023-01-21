@@ -85,7 +85,7 @@ const Animation = () => {
     context.scale(dpr * 2, dpr * 2);
     canvas.addEventListener("click", onClick, false);
 
-    return () => {};
+      return () => undefined;
   }, []);
 
   let frameCount = 0;
