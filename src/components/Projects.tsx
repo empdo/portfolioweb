@@ -61,8 +61,7 @@ const PojectAnim = () => {
     context.lineWidth = 1;
 
     canvas.addEventListener("mousemove", (i) => mouseMove(i));
-
-    return () => { };
+    return () => undefined;
   }, []);
 
   const mouseMove = (e: MouseEvent) => {

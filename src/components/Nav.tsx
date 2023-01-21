@@ -54,7 +54,7 @@ const Nav = () => {
           }
           onAnimationEnd={(e) => handleAnimationFinish(e.animationName)}
         >
-          <a href="https://github.com/empdo" target="_blank">
+          <a href="https://github.com/empdo" target="_blank" rel="noreferrer">
             <svg
               className={"h-12 invert filter"}
               xmlns="http://www.w3.org/2000/svg"
@@ -65,6 +65,7 @@ const Nav = () => {
           </a>
           <a
             href="https://www.linkedin.com/in/emil-essung-1b4b21217/"
+            rel="noreferrer"
             target="_blank"
           >
             <svg

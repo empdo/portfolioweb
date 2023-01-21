@@ -23,6 +23,7 @@ const Header = () => {
           <a
             className={"underline"}
             target="_blank"
+            rel="noreferrer"
             href="https://github.com/empdo/multiplayergame"
           >
             multiplayer game
