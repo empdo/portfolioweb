@@ -80,8 +80,9 @@ const Animation = () => {
     canvas.width = rect.width * dpr;
     canvas.height = rect.height * dpr;
 
+    context.lineWidth = 0.7;
+
     context.scale(dpr * 2, dpr * 2);
-    context.lineWidth = 0.5;
     canvas.addEventListener("click", onClick, false);
 
     return () => {};

@@ -24,7 +24,9 @@ const PojectAnim = () => {
   const balls: Ball[] = [];
 
   const addBall = () => {
-    const ball: Ball = { x: Math.random() * 300, y: Math.random() * 200, r: Math.random() * 25, sx: null, sy: null , shouldMove: true};
+    const r = Math.max(Math.random() * 25, 12);
+
+    const ball: Ball = { x: Math.random() * 600, y: Math.random() * 200, r, sx: null, sy: null, shouldMove: true };
 
     ball.sx = ball.x;
     ball.sy = ball.y;
@@ -55,7 +57,8 @@ const PojectAnim = () => {
     canvas.height = rect.height * dpr;
 
     context.scale(dpr * 2, dpr * 2);
-    context.lineWidth = 0.5;
+
+    context.lineWidth = 1;
 
     canvas.addEventListener("mousemove", (i) => mouseMove(i));
 
@@ -103,19 +106,20 @@ const PojectAnim = () => {
   const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "#A78BFA";
 
     balls.forEach(ball => {
 
       balls.forEach((b: Ball) => {
         if (mx && my && ball.sx && ball.sy) {
 
-          const xtemp = (mx  - ball.x) * 0.001;
-          const ytemp = (my  - ball.y) * 0.001;
+          const xtemp = (mx - ball.x) * 0.01;
+          const ytemp = (my - ball.y) * 0.01;
 
 
-          ball.x = ball.sx + Math.min(xtemp, Math.sign(xtemp) * 10);
-          ball.y = ball.sy + Math.min(ytemp, Math.sign(ytemp) * 10);
+          ball.x = ball.sx + xtemp;
+          ball.y = ball.sy + ytemp;
+
 
         }
       });
@@ -200,7 +204,6 @@ const Projects = () => {
           tecs={["lua", "init?"]}
         />
       </div>
-      <PojectAnim />
     </div>
 
   );
