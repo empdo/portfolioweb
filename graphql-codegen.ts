@@ -18,6 +18,11 @@ const config: CodegenConfig = {
     usePolling: true,
     interval: 5000,
   },
+  config: {
+    scalars: {
+      URI: "string"
+    }
+  },
   watch: ['src/**/*.ts'],
   hooks: { afterAllFileWrite: ['eslint --fix'] },
 };

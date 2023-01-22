@@ -1,22 +1,23 @@
 import { Transition } from '@headlessui/react';
 import type { RepType } from '../pages';
 
-const Project = (props: { name: string; url: string; description: string, tecs: string[], show: boolean, index: string }) => {
+const Project = (props: { name: string; url: string; description: string, tecs: string[], show: boolean, index: number}) => {
 
   return (
     <Transition
+      style={{"--delay": `${(300 + 50 * props.index)}ms`}}
       appear={true}
       show={props.show}
-      enter={`transition duration-500 ${props.index}`}
+      enter={`transition duration-500 delay-[var(--delay)]`}
       enterFrom="opacity-0 translate-y-40"
       enterTo="opacity-100 translate-y-0"
       leave={`transition duration-200`}
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="flex min-h-md min-w-[20rem] w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg">
+      <div className="flex min-h-md min-w-[20rem] w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg ">
         <div className={"flex w-full flex-row items-center pb-3"}>
-          <h2 className={"text-2xl font-medium text-white"}>{props.name}</h2>
+          <h2 className={"text-2xl font-medium text-white capitalize"}>{props.name}</h2>
           <span className={"flex-grow"} />
           <a href={props.url} target={"_blank"} rel={"noreferrer"}>
             <svg
@@ -41,7 +42,7 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
 
 const Projects = (props: { show: boolean, projects: RepType["repositories"]}) => {
   return (
-    <div className={"flex flex-col content-start items-center relative z-0"}>
+    <div className={"flex flex-col content-start items-center min-h-screen relative z-0"}>
       <Transition
         appear={true}
         show={props.show}
@@ -58,14 +59,15 @@ const Projects = (props: { show: boolean, projects: RepType["repositories"]}) =>
       </Transition>
       <div
         className={
-          " flex min-h-screen flex-wrap content-start items-center justify-center gap-12 p-10 pt-0 z-0"
+          " flex  flex-wrap content-start items-center justify-center gap-12 p-10 pt-0 z-0"
         }
       >
         {
           props.projects.map((project , index ) => {
-            const delay = (300 + 50 * index).toString();
 
-            if (!project?.node || project.node.__typename !== 'Repository') return;
+            if (!project?.node) return;
+              
+            if (project.node.__typename !== 'Repository') return;
             
             const {id, name, url, description, repositoryTopics} = project.node;
 
@@ -77,13 +79,35 @@ const Projects = (props: { show: boolean, projects: RepType["repositories"]}) =>
                 description={description || name}
                 tecs={repositoryTopics?.nodes?.map((node ) => node?.topic.name || "") || []}
                 show={props.show}
-                index={`delay-[${delay}ms]`}
+                index={index}
               />
             )
           }
           )
         }
       </div>
+      <Transition
+        appear={true}
+        show={props.show}
+        enter="transition-opacity duration-[400ms] delay-1000"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <p className={"text-xl text-violet-400"}>
+          Check out my other projects at {" "}
+          <a
+            className={"underline"}
+            target="_blank"
+            rel="noreferrer"
+            href="https://github.com/empdo/multiplayergame"
+          >
+            my github
+          </a>
+          </p>
+      </Transition>
     </div>
 
   );

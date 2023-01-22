@@ -5,6 +5,7 @@ query getRepositories($username: String!) {
       totalCount
       edges {
         node {
+          __typename
           ... on Repository {
             id
             name

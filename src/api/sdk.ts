@@ -21,7 +21,7 @@ export type Scalars = {
   GitTimestamp: any;
   HTML: any;
   PreciseDateTime: any;
-  URI: any;
+  URI: string;
   X509Certificate: any;
 };
 
@@ -26366,7 +26366,7 @@ export type GetRepositoriesQueryVariables = Exact<{
 }>;
 
 
-export type GetRepositoriesQuery = { __typename?: 'Query', user?: { __typename?: 'User', pinnedItems: { __typename?: 'PinnableItemConnection', totalCount: number, edges?: Array<{ __typename?: 'PinnableItemEdge', node?: { __typename?: 'Gist' } | { __typename?: 'Repository', id: string, name: string, stargazerCount: number, url: any, description?: string | null, primaryLanguage?: { __typename?: 'Language', name: string, color?: string | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string, id: string } } | null> | null } } | null } | null> | null } } | null };
+export type GetRepositoriesQuery = { __typename?: 'Query', user?: { __typename?: 'User', pinnedItems: { __typename?: 'PinnableItemConnection', totalCount: number, edges?: Array<{ __typename?: 'PinnableItemEdge', node?: { __typename: 'Gist' } | { __typename: 'Repository', id: string, name: string, stargazerCount: number, url: string, description?: string | null, primaryLanguage?: { __typename?: 'Language', name: string, color?: string | null } | null, repositoryTopics: { __typename?: 'RepositoryTopicConnection', nodes?: Array<{ __typename?: 'RepositoryTopic', topic: { __typename?: 'Topic', name: string, id: string } } | null> | null } } | null } | null> | null } } | null };
 
 
 export const GetRepositoriesDocument = gql`
@@ -26376,6 +26376,7 @@ export const GetRepositoriesDocument = gql`
       totalCount
       edges {
         node {
+          __typename
           ... on Repository {
             id
             name
