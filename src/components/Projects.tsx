@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react';
-import { repository, topic } from "../../interfaces";
+import type { RepType } from '../pages';
 
 const Project = (props: { name: string; url: string; description: string, tecs: string[], show: boolean, index: string }) => {
 
@@ -39,7 +39,7 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
   );
 };
 
-const Projects = (props: { show: boolean, projects: repository[] }) => {
+const Projects = (props: { show: boolean, projects: RepType["repositories"]}) => {
   return (
     <div className={"flex flex-col content-start items-center relative z-0"}>
       <Transition
@@ -62,16 +62,20 @@ const Projects = (props: { show: boolean, projects: repository[] }) => {
         }
       >
         {
-          props.projects.map((project: repository, index: number) => {
+          props.projects.map((project , index ) => {
             const delay = (300 + 50 * index).toString();
+
+            if (!project?.node || project.node.__typename !== 'Repository') return;
+            
+            const {id, name, url, description, repositoryTopics} = project.node;
 
             return (
               <Project
-                key={project.name}
-                name={project.name.replace("_", " ").replace("-", " ")}
-                url={project.url}
-                description={project.description || project.name}
-                tecs={project.repositoryTopics.nodes.map((node: topic) => node.topic.name)}
+                key={id}
+                name={name.replace("_", " ").replace("-", " ")}
+                url={url}
+                description={description || name}
+                tecs={repositoryTopics?.nodes?.map((node ) => node?.topic.name || "") || []}
                 show={props.show}
                 index={`delay-[${delay}ms]`}
               />

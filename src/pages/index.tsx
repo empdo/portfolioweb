@@ -1,24 +1,26 @@
-import { type NextPage } from "next";
+import { InferGetStaticPropsType, type NextPage } from "next";
 import Head from "next/head";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Projects from "../components/Projects";
-import { useState, useEffect, useRef} from "react";
+import { useRef} from "react";
 import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
 import useOnScreen from '../components/useOnScreen';
 
 import {repository} from "../../interfaces";
 
 import { Inter } from '@next/font/google'
+import getClient from "../api";
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
 
+export type RepType  = InferGetStaticPropsType<typeof getStaticProps>;
 
-const Home: NextPage = (props: { pinnedItems: repository[]}) => {
+
+const Home : NextPage<RepType> = ({ repositories }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const show = useOnScreen(containerRef);
 
@@ -36,7 +38,7 @@ const Home: NextPage = (props: { pinnedItems: repository[]}) => {
         </section>
         <section className={"flex flex-col min-h-screen items-center justify-center max-w-page mx-auto snap-center"}>
           <div ref={containerRef}>
-            <Projects show={show} projects={props.pinnedItems} />
+            <Projects show={show} projects={repositories} />
           </div>
         </section>
       </main>
@@ -44,68 +46,16 @@ const Home: NextPage = (props: { pinnedItems: repository[]}) => {
   );
 };
 
-export async function getStaticProps() {
-  const httpLink = createHttpLink({
-    uri: 'https://api.github.com/graphql',
-  });
+export const getStaticProps = async () => {
+  const client = getClient();
 
-  const authLink = setContext((_, { headers }) => {
-    return {
-      headers: {
-        ...headers,
-        authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN || ""}`,
-      }
-    }
-  });
+  const {user} = await client.getRepositories({username: "empdo"});
 
-  const client = new ApolloClient({
-    link: authLink.concat(httpLink),
-    cache: new InMemoryCache()
-  });
-
-const {data} =  await client.query({
-    query: gql`{
-        viewer {
-            login
-          }
-          user(login: "empdo") {
-            pinnedItems(first: 6) {
-              totalCount
-              edges {
-                node {
-                  ... on Repository {
-                    id
-                    name
-                    stargazerCount
-                    url
-                    primaryLanguage {
-                      name
-                      color
-                    }
-                    repositoryTopics(first: 2) {
-                      nodes {
-                        topic {
-                          name
-                          id
-                        }
-                      }
-                    }
-                    description
-                  }
-                }
-              }
-            }
-        }      
-      }`
-    }
-  )
-  
-  const {user} = data;
-  const pinnedItems : repository[] = user.pinnedItems.edges.map(({node}) => node);
+  const repositories = user?.pinnedItems.edges || [];
 
   return {
     props: {
-      pinnedItems
+      repositories
     }
   }
 }

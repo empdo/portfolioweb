@@ -1,0 +1,31 @@
+
+query getRepositories($username: String!) {
+  user(login: $username) {
+    pinnedItems(first: 6) {
+      totalCount
+      edges {
+        node {
+          ... on Repository {
+            id
+            name
+            stargazerCount
+            url
+            primaryLanguage {
+              name
+              color
+            }
+            repositoryTopics(first: 2) {
+              nodes {
+                topic {
+                  name
+                  id
+                }
+              }
+            }
+            description
+          }
+        }
+      }
+    }
+  }      
+}
