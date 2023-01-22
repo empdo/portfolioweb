@@ -1,141 +1,5 @@
-import { useEffect, useRef } from "react";
 import { Transition } from '@headlessui/react';
-
-interface Ball {
-  x: number;
-  y: number;
-  r: number;
-  sx: number | null;
-  sy: number | null;
-  shouldMove: boolean;
-}
-
-const distance = (x1: number, y1: number, x2: number, y2: number) =>
-  Math.hypot(x2 - x1, y2 - y1);
-
-
-const PojectAnim = () => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  let canvas: HTMLCanvasElement | null;
-  let context: CanvasRenderingContext2D | null;
-
-  let mx: number | null, my: number | null = null;
-
-  const balls: Ball[] = [];
-
-  const addBall = () => {
-    const r = Math.max(Math.random() * 25, 12);
-
-    const ball: Ball = { x: Math.random() * 600, y: Math.random() * 200, r, sx: null, sy: null, shouldMove: true };
-
-    ball.sx = ball.x;
-    ball.sy = ball.y;
-
-    balls.push(ball);
-
-
-  }
-
-  useEffect(() => {
-    canvas = canvasRef.current;
-
-    if (!canvas) {
-      return;
-    }
-
-    context = canvas.getContext("2d");
-    if (!context) {
-      return;
-    }
-
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-
-    // Give the canvas pixel dimensions of their CSS
-    // size * the device pixel ratio.
-    canvas.width = rect.width * dpr;
-    canvas.height = rect.height * dpr;
-
-    context.scale(dpr * 2, dpr * 2);
-
-    context.lineWidth = 1;
-
-    canvas.addEventListener("mousemove", (i) => mouseMove(i));
-    return () => undefined;
-  }, []);
-
-  const mouseMove = (e: MouseEvent) => {
-    if (!canvas || !context) return;
-
-    const transform = context.getTransform();
-
-    const invertedScaleX = 1 / transform.a;
-    const invertedScaleY = 1 / transform.d;
-
-    mx = e.clientX * invertedScaleX - canvas.clientLeft;
-    my = e.clientY * invertedScaleY - canvas.clientTop;
-
-  };
-
-  let frameCount = 0;
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const render = () => {
-        frameCount++;
-        if (context != null) {
-          draw(context, frameCount);
-        }
-      };
-      render();
-    }, 10);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  addBall();
-  addBall();
-  addBall();
-  addBall();
-  addBall();
-  addBall();
-  addBall();
-  addBall();
-
-  const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-    ctx.strokeStyle = "#A78BFA";
-
-    balls.forEach(ball => {
-
-      balls.forEach((b: Ball) => {
-        if (mx && my && ball.sx && ball.sy) {
-
-          const xtemp = (mx - ball.x) * 0.01;
-          const ytemp = (my - ball.y) * 0.01;
-
-
-          ball.x = ball.sx + xtemp;
-          ball.y = ball.sy + ytemp;
-
-
-        }
-      });
-
-
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
-      ctx.stroke();
-
-    });
-
-
-  };
-  return <canvas className={"mx-6 w-full h-screen absolute z-10 top-0"} ref={canvasRef} />;
-};
-
+import { repository, topic } from "../../interfaces";
 
 const Project = (props: { name: string; url: string; description: string, tecs: string[], show: boolean, index: string }) => {
 
@@ -150,7 +14,7 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="flex min-h-md w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg">
+      <div className="flex min-h-md min-w-[20rem] w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg">
         <div className={"flex w-full flex-row items-center pb-3"}>
           <h2 className={"text-2xl font-medium text-white"}>{props.name}</h2>
           <span className={"flex-grow"} />
@@ -168,13 +32,14 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
         <span className={"flex-grow"} />
         <div className="bottom-0 flex flex-row gap-5">
           {props.tecs.map((content) => <p key={content} className={"text-xl text-violet-300"}>{content}</p>)}
+
         </div>
       </div>
     </Transition>
   );
 };
 
-const Projects = (props: { show: boolean }) => {
+const Projects = (props: { show: boolean, projects: repository[] }) => {
   return (
     <div className={"flex flex-col content-start items-center relative z-0"}>
       <Transition
@@ -196,46 +61,24 @@ const Projects = (props: { show: boolean }) => {
           " flex min-h-screen flex-wrap content-start items-center justify-center gap-12 p-10 pt-0 z-0"
         }
       >
-        <Project
-          name="Portfolio"
-          url="https://github.com/empdo/multiplayergame"
-          description='This website, a personal portfolio for showing my work and blog posts'
-          tecs={["React", "Nextjs"]}
-          show={props.show}
-          index="delay-[300ms]"
-        />
-        <Project
-          name="Multiplayer game"
-          url="https://github.com/empdo/multiplayergame"
-          description='A multiplayergame made in unity, created for a highschool thesis with the focus on the network somehtig.'
-          tecs={["Unity"]}
-          show={props.show}
-          index="delay-[350ms]"
-        />
-        <Project
-          name="Mind game"
-          url="https://github.com/empdo/mindgame"
-          description='A web based version of the card game "The mind". (not finished)'
-          tecs={["React", "SQL"]}
-          show={props.show}
-          index="delay-[400ms]"
-        />
-        <Project
-          name="Message app"
-          url="https://github.com/empdo/message_api"
-          description="A web based message app."
-          tecs={["React", "SQL"]}
-          show={props.show}
-          index="delay-[450ms]"
-        />
-        <Project
-          name="Dotfiles"
-          url="https://github.com/empdo/dotfiles"
-          description="Not a project, but something to share."
-          tecs={["lua", "init?"]}
-          show={props.show}
-          index="delay-[500ms]"
-        />
+        {
+          props.projects.map((project: repository, index: number) => {
+            const delay = (300 + 50 * index).toString();
+
+            return (
+              <Project
+                key={project.name}
+                name={project.name.replace("_", " ").replace("-", " ")}
+                url={project.url}
+                description={project.description || project.name}
+                tecs={project.repositoryTopics.nodes.map((node: topic) => node.topic.name)}
+                show={props.show}
+                index={`delay-[${delay}ms]`}
+              />
+            )
+          }
+          )
+        }
       </div>
     </div>
 
