@@ -3,7 +3,7 @@ import Head from "next/head";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Projects from "../components/Projects";
-import { useState, useEffect, useRef} from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { Inter } from '@next/font/google'
 
@@ -12,40 +12,37 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
+const Home: NextPage = () => {
 
-function useOnScreen(ref: RefObject<HTMLElement>) {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isOnScreen, setIsOnScreen] = useState(false);
+  const [show, setShow] = useState(false);
+  const containerRef = useRef(null);
+
+
+  const callbackFunction = (entries: IntersectionObserverEntry[]) => {
+    const [entry] = entries;
+    if (!entry) return;
+    console.log(entry.isIntersecting);
+
+    setShow(entry.isIntersecting);
+  }
+
+  const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.5,
+  }
 
   useEffect(() => {
-    observerRef.current = new IntersectionObserver(([entry]) => {
-      if (!entry) return;
-      console.log(entry.isIntersecting);
-      setIsOnScreen(entry.isIntersecting)
-    },{
-        root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
-      }
-    );
-  }, []);
+    const current = containerRef.current;
 
-  useEffect(() => {
-    if (observerRef.current )
-      observerRef.current.observe(ref.current);
+    const observer = new IntersectionObserver(callbackFunction, options);
+    if (current) observer.observe(current);
 
     return () => {
-      if (observerRef.current)
-        observerRef.current.disconnect();
-    };
-  }, [ref]);
+      if (current) observer.unobserve(current);
+    }
 
-  return isOnScreen;
-}
-
-const Home: NextPage = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const show = useOnScreen(containerRef);
+  }, [containerRef, options]);
 
   return (
     <div className={`${inter.variable} font-sans scroll-smooth`}>
