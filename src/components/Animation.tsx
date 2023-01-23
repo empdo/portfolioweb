@@ -60,6 +60,12 @@ const Animation = () => {
   let canvas: HTMLCanvasElement | null;
   let context: CanvasRenderingContext2D | null;
 
+  const handleResize = () => {
+   // if (!context) return;
+   // draw(context, frameCount);
+   // done = false;
+  };
+
   useEffect(() => {
     canvas = canvasRef.current;
 
@@ -81,6 +87,9 @@ const Animation = () => {
     canvas.height = rect.height * dpr;
 
     context.lineWidth = 0.7;
+
+
+    window.addEventListener("resize", handleResize);
 
     context.scale(dpr * 2, dpr * 2);
     canvas.addEventListener("click", onClick, false);
@@ -121,9 +130,8 @@ const Animation = () => {
   }
 
   const draw = (ctx: CanvasRenderingContext2D, frameCount: number) => {
-    if (done) return;
+    if (done || !canvas || !ctx) return;
     const radius = 75;
-
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
     ctx.strokeStyle = "white";
@@ -160,7 +168,7 @@ const Animation = () => {
       ctx.stroke();
     });
   };
-  return <canvas className={"mx-6"} style={{ width: "300px" , height: "300px"}} ref={canvasRef} />;
+  return <canvas className="mx-6 sm:block hidden tablet:h-[300px] tablet:w-[300px] w-[300px] h-[300px]" ref={canvasRef} />;
 };
 
 export default Animation;

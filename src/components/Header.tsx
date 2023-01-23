@@ -9,25 +9,23 @@ const Header = () => {
       enter={`transition duration-500 delay-300`}
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
-    >
-      <div
         className={
-          "mx-auto flex w-full max-w-page flex-row items-center justify-between px-10"
+          "mx-auto flex w-full h-screen max-w-page tablet:flex-row flex-col tablet:items-center items-end tablet:justify-evenly justify-center gap-5 px-10"
         }
-      >
+    >
         <div className={"flex max-w-3xl flex-col"}>
-          <h1 className={"pb-4 text-6xl font-bold text-white"}>Emil Essung</h1>
+          <h1 className={"pb-4 sm:text-6xl text-4xl font-bold text-white"}>Emil Essung</h1>
           <div>
-            <h2 className={"inline pb-2 text-2xl font-medium text-white"}>
+            <h2 className={"inline pb-2 sm:text-2xl text-xl red font-medium text-white"}>
               Web & Software developer
             </h2>
           </div>
-          <p className={"pb-2 text-xl text-gray-300"}>
+          <p className={"pb-2 sm:text-xl text-lg text-gray-300"}>
             19 year old developer from Gothenburg, Sweden. I have a great
             interest in programming, math/physics and anything *n.x (Linux,
             Unix) related.
           </p>
-          <p className={"text-xl text-violet-400"}>
+          <p className={"sm:text-xl text-lg text-violet-400"}>
             Currently working on a basic{" "}
             <a
               className={"underline"}
@@ -40,7 +38,6 @@ const Header = () => {
           </p>
         </div>
         <Animation />
-      </div>
     </Transition>
   );
 };

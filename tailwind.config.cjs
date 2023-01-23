@@ -8,6 +8,9 @@ module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        'tablet': '811px',
+      },
       fontFamily: {
         sans: ['var(--font-inter)', ...fontFamily.sans],
       },

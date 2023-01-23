@@ -3,7 +3,7 @@ import Head from "next/head";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
 import Projects from "../components/Projects";
-import { useRef} from "react";
+import { useRef } from "react";
 import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
 import useOnScreen from '../components/useOnScreen';
 
@@ -16,10 +16,10 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-export type RepType  = InferGetStaticPropsType<typeof getStaticProps>;
+export type RepType = InferGetStaticPropsType<typeof getStaticProps>;
 
 
-const Home : NextPage<RepType> = ({ repositories }) => {
+const Home: NextPage<RepType> = ({ repositories }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const show = useOnScreen(containerRef);
 
@@ -31,9 +31,9 @@ const Home : NextPage<RepType> = ({ repositories }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={"flex-col flex min-h-screen bg-gradient-to-r from-slate-900 to-gray-900 snap-y snap-mandatory"}>
-        <section className={"flex flex-col shrink-0 min-h-screen items-center justify-center max-w-page mx-auto snap-center"}>
-          <Nav/>
-            <Header />
+        <section className={"flex flex-col min-h-screen items-center justify-center max-w-page mx-auto snap-center"}>
+          <Nav />
+          <Header />
         </section>
         <section className={"flex flex-col shrink-0 min-h-screen items-center justify-center max-w-page mx-auto snap-start"}>
           <div ref={containerRef}>
@@ -48,7 +48,7 @@ const Home : NextPage<RepType> = ({ repositories }) => {
 export const getStaticProps = async () => {
   const client = getClient();
 
-  const {user} = await client.getRepositories({username: "empdo"});
+  const { user } = await client.getRepositories({ username: "empdo" });
 
   const repositories = user?.pinnedItems.edges || [];
 
