@@ -22,7 +22,7 @@ const Header = () => {
           </div>
           <p className={"pb-2 sm:text-xl text-lg text-gray-300"}>
             19 year old developer from Gothenburg, Sweden. I have a great
-            interest in programming, math/physics and anything *n.x (Linux,
+            interest in programming, math/physics and anything *NIX (Linux,
             Unix) related.
           </p>
           <p className={"sm:text-xl text-lg text-violet-400"}>
