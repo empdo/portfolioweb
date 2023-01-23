@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Transition } from "@headlessui/react";
 import { useState } from "react";
 
 const Nav = () => {
@@ -20,22 +21,32 @@ const Nav = () => {
   };
 
   return (
-    <nav
-      className={
-        "absolute top-0 flex w-full flex-row items-center px-10 pt-4"
-      }
+    <Transition
+      appear={true}
+      show={true}
+      enter={`transition duration-500 delay-300`}
+      enterFrom="opacity-0 opacity-0"
+      enterTo="opacity-100 opacity-100"
     >
-      <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
-      <span className={"flex-grow"} />
-      <div className={"animate-fadein" + " flex flex-row items-center "}>
-        <a className={"h-min"} href="#projects">
-          <h2 className={"pl-4 text-3xl font-semibold text-white"}>Projects</h2>
-        </a>
-        <a className={"h-min"} href="">
-          <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
-        </a>
-      </div>
-    </nav>
+      <nav
+        className={
+          "absolute top-0 flex w-full flex-row items-center px-10 pt-4 left-0"
+        }
+      >
+        <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
+        <span className={"flex-grow"} />
+        <div className={"animate-fadein" + " flex flex-row items-center "}>
+          <a className={"h-min"} href="#projects">
+            <h2 className={"pl-4 text-3xl font-semibold text-white"}>
+              Projects
+            </h2>
+          </a>
+          <a className={"h-min"} href="">
+            <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
+          </a>
+        </div>
+      </nav>
+    </Transition>
   );
 
   return (

@@ -1,11 +1,28 @@
-import { Transition } from '@headlessui/react';
-import type { RepType } from '../pages';
+import { Transition } from "@headlessui/react";
+import type { RepType } from "../pages";
 
-const Project = (props: { name: string; url: string; description: string, tecs: string[], show: boolean, index: number}) => {
+const Project = (props: {
+  name: string;
+  url: string;
+  description: string;
+  primaryLanguage:
+    | {
+        __typename?: "Language" | undefined;
+        name: string;
+        color?: string | null | undefined;
+      }
+    | null
+    | undefined;
+  tecs: string[];
+  show: boolean;
+  index: number;
+}) => {
+
+  console.log(props.primaryLanguage);
 
   return (
     <Transition
-      style={{"--delay": `${(300 + 50 * props.index)}ms`}}
+      style={{ "--delay": `${300 + 50 * props.index}ms` }}
       appear={true}
       show={props.show}
       enter={`transition duration-500 delay-[var(--delay)]`}
@@ -15,9 +32,11 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="flex min-h-md min-w-[20rem] w-full max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-violet-900 p-5 shadow-2xl bg-200% hover:animate-scrollbg ">
+      <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-[#3e0652] bg-200% p-5 shadow-2xl hover:animate-scrollbg ">
         <div className={"flex w-full flex-row items-center pb-3"}>
-          <h2 className={"text-2xl font-medium text-white capitalize"}>{props.name}</h2>
+          <h2 className={"text-2xl font-medium capitalize text-white"}>
+            {props.name}
+          </h2>
           <span className={"flex-grow"} />
           <a href={props.url} target={"_blank"} rel={"noreferrer"}>
             <svg
@@ -31,18 +50,29 @@ const Project = (props: { name: string; url: string; description: string, tecs: 
         </div>
         <p className={"text-lg text-gray-200"}>{props.description}</p>
         <span className={"flex-grow"} />
-        <div className="bottom-0 flex flex-row gap-5">
-          {props.tecs.map((content) => <p key={content} className={"text-xl text-violet-300"}>{content}</p>)}
-
+        <div className="bottom-0 flex flex-row gap-5 w-full">
+          {props.tecs.map((content) => (
+            <p key={content} className={"text-xl text-violet-300"}>
+              {content}
+            </p>
+          ))}
+          <span className="flex-grow"/>
         </div>
       </div>
     </Transition>
   );
 };
 
-const Projects = (props: { show: boolean, projects: RepType["repositories"]}) => {
+const Projects = (props: {
+  show: boolean;
+  projects: RepType["repositories"];
+}) => {
   return (
-    <div className={"flex flex-col content-start items-center min-h-screen relative z-0"}>
+    <div
+      className={
+        "relative z-0 flex min-h-screen flex-col content-start items-center"
+      }
+    >
       <Transition
         appear={true}
         show={props.show}
@@ -53,38 +83,49 @@ const Projects = (props: { show: boolean, projects: RepType["repositories"]}) =>
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
       >
-        <h1 className={"text-5xl font-semibold text-gray-300 pb-12 z-0"} id="projects">
+        <h1
+          className={"z-0 pb-12 text-5xl font-semibold text-gray-300"}
+          id="projects"
+        >
           My projects
         </h1>
       </Transition>
       <div
         className={
-          " flex  flex-wrap content-start items-center justify-center gap-12 p-10 pt-0 z-0"
+          " z-0  flex flex-wrap content-start items-center justify-center gap-12 p-10 pt-0"
         }
       >
-        {
-          props.projects.map((project , index ) => {
+        {props.projects.map((project, index) => {
+          if (!project?.node) return;
 
-            if (!project?.node) return;
-              
-            if (project.node.__typename !== 'Repository') return;
-            
-            const {id, name, url, description, repositoryTopics} = project.node;
+          if (project.node.__typename !== "Repository") return;
 
-            return (
-              <Project
-                key={id}
-                name={name.replace("_", " ").replace("-", " ")}
-                url={url}
-                description={description || name}
-                tecs={repositoryTopics?.nodes?.map((node ) => node?.topic.name || "") || []}
-                show={props.show}
-                index={index}
-              />
-            )
-          }
-          )
-        }
+          const {
+            id,
+            name,
+            url,
+            description,
+            repositoryTopics,
+            primaryLanguage,
+          } = project.node;
+
+          return (
+            <Project
+              key={id}
+              name={name.replace("_", " ").replace("-", " ")}
+              url={url}
+              description={description || name}
+              tecs={
+                repositoryTopics?.nodes?.map(
+                  (node) => node?.topic.name || ""
+                ) || []
+              }
+              primaryLanguage={primaryLanguage}
+              show={props.show}
+              index={index}
+            />
+          );
+        })}
       </div>
       <Transition
         appear={true}
@@ -97,7 +138,7 @@ const Projects = (props: { show: boolean, projects: RepType["repositories"]}) =>
         leaveTo="opacity-0"
       >
         <p className={"text-xl text-violet-400"}>
-          Check out my other projects at {" "}
+          Check out my other projects at{" "}
           <a
             className={"underline"}
             target="_blank"
@@ -106,12 +147,10 @@ const Projects = (props: { show: boolean, projects: RepType["repositories"]}) =>
           >
             my github
           </a>
-          </p>
+        </p>
       </Transition>
     </div>
-
   );
 };
 
 export default Projects;
-

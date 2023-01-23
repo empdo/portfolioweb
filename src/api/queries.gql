@@ -15,7 +15,7 @@ query getRepositories($username: String!) {
               name
               color
             }
-            repositoryTopics(first: 2) {
+            repositoryTopics(first: 3) {
               nodes {
                 topic {
                   name

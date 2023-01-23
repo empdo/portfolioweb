@@ -26386,7 +26386,7 @@ export const GetRepositoriesDocument = gql`
               name
               color
             }
-            repositoryTopics(first: 2) {
+            repositoryTopics(first: 3) {
               nodes {
                 topic {
                   name
