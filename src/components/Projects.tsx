@@ -18,20 +18,18 @@ const Project = (props: {
   index: number;
 }) => {
 
-  console.log(props.primaryLanguage);
-
   return (
     <Transition
       style={{ "--delay": `${300 + 50 * props.index}ms` }}
       appear={true}
       show={props.show}
-      unmount={true}
+      unmount={false}
       enter={`transition duration-500 delay-[var(--delay)]`}
       enterFrom="opacity-0 translate-y-40"
       enterTo="opacity-100 translate-y-0"
       leave={`transition duration-200`}
       leaveFrom="opacity-100"
-      leaveTo="opacity-0"
+      leaveTo="opacity-0 block"
     >
       <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-[#3e0652] bg-200% p-5 shadow-2xl hover:animate-scrollbg ">
         <div className={"flex w-full flex-row items-center pb-3"}>
@@ -77,12 +75,13 @@ const Projects = (props: {
       <Transition
         appear={true}
         show={props.show}
+        unmount={false}
         enter="transition-opacity duration-300 delay-300"
         enterFrom="opacity-0"
         enterTo="opacity-100"
         leave="transition-opacity duration-300"
         leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+        leaveTo="opacity-0 block"
       >
         <h1
           className={"z-0 pb-12 text-5xl font-semibold text-gray-300"}
@@ -137,6 +136,7 @@ const Projects = (props: {
         leave="transition-opacity duration-300"
         leaveFrom="opacity-100"
         leaveTo="opacity-0"
+        className="pb-12"
       >
         <p className={"text-xl text-violet-400"}>
           Check out my other projects at{" "}

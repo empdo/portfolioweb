@@ -1,36 +1,43 @@
 import { Transition } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Nav = () => {
   const [showIcons, setShowIcons] = useState(true);
-  const [iconAnimationState, setIconAnimationState] = useState("");
-  const [linksAnimationState, setLinksAnimationState] = useState("");
 
   const hamburgerStyle =
     "h-1 w-8 rounded-sm bg-white transition ease transform duration-150 ";
+
+  useEffect(() => {
+    const onScroll = () =>  !showIcons && setShowIcons(!showIcons);
+    
+    window.addEventListener("scroll", onScroll);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [showIcons]);
 
   return (
     <Transition
       appear={true}
       show={true}
+      as="nav"
       enter={`transition duration-500 delay-300`}
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
       className={
-        "absolute top-0 left-0 flex w-full flex-row items-center justify-end px-10 pt-4"
+        "flex w-full flex-row items-center justify-end px-10 pt-4 justify-self-start"
       }
     >
       <Transition
         appear={true}
         show={!showIcons}
         enter={`transition duration-300`}
-        enterFrom="opacity-50 scale-x-0"
-        enterTo="opacity-100 scale-x-100"
+        enterFrom="opacity-50 translate-x-full"
+        enterTo="opacity-100 translate-x-0"
         leave="transition duration-300"
         leaveFrom="opacity-100 translate-x-0"
         leaveTo="opacity-50 translate-x-full"
         className={
-          "absolute top-0 right-0 flex min-h-screen w-full flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl"
+          "fixed top-0 right-0 flex min-h-screen w-2/3 flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl overflow-hidden"
         }
       >
         <a className={"h-min"} href="#projects">

@@ -6,11 +6,12 @@ const Header = () => {
     <Transition
       appear={true}
       show={true}
+      as="header"
       enter={`transition duration-500 delay-300`}
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
         className={
-          "mx-auto flex w-full h-screen max-w-page tablet:flex-row flex-col tablet:items-center items-end tablet:justify-evenly justify-center gap-5 px-10"
+          "mx-auto flex w-full flex-1 max-w-page tablet:flex-row flex-col tablet:items-center items-end tablet:justify-evenly justify-center gap-5 px-10 absolute inset-0"
         }
     >
         <div className={"flex max-w-3xl flex-col"}>
