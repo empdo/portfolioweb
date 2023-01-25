@@ -25,6 +25,7 @@ const Project = (props: {
       style={{ "--delay": `${300 + 50 * props.index}ms` }}
       appear={true}
       show={props.show}
+      unmount={true}
       enter={`transition duration-500 delay-[var(--delay)]`}
       enterFrom="opacity-0 translate-y-40"
       enterTo="opacity-100 translate-y-0"
