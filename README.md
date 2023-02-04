@@ -1,1 +1,3 @@
 A simple portfolio for displaying some of my work and potentially uploading some blog posts.
+
+Writen in Next.js using grapql and ....
