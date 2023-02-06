@@ -1,5 +1,8 @@
 import { Transition } from "@headlessui/react";
+import Image from 'next/image';
 import { useEffect, useState } from "react";
+import GitIcon from "./GitIcon.tsx";
+import LinkedInIcon from "./LinkedInIcon.tsx";
 
 const Nav = () => {
   const [showIcons, setShowIcons] = useState(true);
@@ -24,7 +27,7 @@ const Nav = () => {
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
       className={
-        "flex w-full flex-row items-center justify-end px-10 pt-4 justify-self-start"
+        "flex w-full flex-row items-center justify-end px-10 pt-4 justify-self-start z-10"
       }
     >
       <Transition
@@ -41,14 +44,16 @@ const Nav = () => {
         }
       >
         <a className={"h-min"} href="#projects">
-          <h2 className={"text-3xl font-semibold text-white"}>Projects</h2>
+          <img src="./github.svg" alt="git_icon"/>
         </a>
         <a className={"h-min"} href="">
-          <h2 className={"text-3xl font-semibold text-white"}>Posts</h2>
+          <h2 className={"text-3xl font-semibold text-white"}>Work</h2>
         </a>
       </Transition>
       <div className="flex w-full flex-row items-center ">
+      <a href="/">
         <h1 className={"pb-2 text-6xl font-medium text-violet-400 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>~</h1>
+        </a>
         <span className={"flex-grow"} />
         <div
           className={
@@ -76,15 +81,17 @@ const Nav = () => {
             }
           ></span>
         </div>
-        <div className={"hidden flex-row items-center sm:flex "}>
-          <a className={"h-min"} href="#projects">
-            <h2 className={"pl-4 text-3xl font-semibold text-white"}>
-              Projects
-            </h2>
+        <div className={"hidden flex-row gap-6 items-end sm:flex "}>
+          <a className={"h-min"} href="#work">
+            <h2 className={"text-4xl font-bold text-white"}>Work</h2>
           </a>
-          <a className={"h-min"} href="">
-            <h2 className={"pl-4 text-3xl font-semibold text-white"}>Posts</h2>
+          <a className={"cursor-pointer "} href="https://github.com/empdo">
+            <LinkedInIcon className="h-10 fill-white hover:fill-gray-300"/>
           </a>
+          <a className={"cursor-pointer "} href="https://github.com/empdo">
+            <GitIcon className="h-10 fill-white hover:fill-gray-300" />
+          </a>
+
         </div>
       </div>
     </Transition>

@@ -9,11 +9,11 @@ const Stuff = (props: {
 
   const [showProjects, setShowProjects] = useState(true);
 
-  const textStyle = "z-0 pb-12 sm:text-5xl text-4xl font-semibold cursor-pointer transition duration-500 ";
+  const textStyle = "z-0 sm:text-5xl text-4xl font-semibold cursor-pointer transition duration-500 ";
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
-      <div className="flex sm:gap-3 gap-2 items-center">
+    <div className="flex flex-col items-center min-h-screen pt-10 gap-12">
+      <div className="flex sm:gap-8 gap-2 items-center justify-baseline">
         <h1
           className={
             textStyle
@@ -24,9 +24,6 @@ const Stuff = (props: {
         >
           Projects
         </h1>
-        <h1
-          className={textStyle + "text-gray-300"}
-        > / </h1>
         <h1
           className={
             textStyle
