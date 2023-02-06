@@ -1,8 +1,7 @@
 import { Transition } from "@headlessui/react";
-import Image from 'next/image';
 import { useEffect, useState } from "react";
-import GitIcon from "./GitIcon.tsx";
-import LinkedInIcon from "./LinkedInIcon.tsx";
+import GitIcon from "./GitIcon";
+import LinkedInIcon from "./LinkedInIcon";
 
 const Nav = () => {
   const [showIcons, setShowIcons] = useState(true);

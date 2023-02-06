@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react";
 import type { RepType } from "../pages";
-import GitIcon from "./GitIcon.tsx";
+import GitIcon from "./GitIcon";
 
 const Project = (props: {
   name: string;
