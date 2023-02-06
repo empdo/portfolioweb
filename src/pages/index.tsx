@@ -10,6 +10,7 @@ import useOnScreen from '../components/useOnScreen';
 import { Inter } from '@next/font/google'
 import getClient from "../api";
 import { Transition } from "@headlessui/react";
+import Stuff from "../components/Stuff";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -35,9 +36,9 @@ const Home: NextPage<RepType> = ({ repositories }) => {
           <Nav />
           <Header />
         </div>
-        <section className={"flex flex-col shrink-0 min-h-screen items-center justify-center max-w-page snap-center"}>
+        <section className={"flex flex-col shrink-0 w-full min-h-screen items-center justify-center snap-center"}>
           <div ref={containerRef}>
-           <Projects show={show} projects={repositories} />
+           <Stuff show={show} projects={repositories} />
           </div>
         </section>
       </div>

@@ -40,8 +40,18 @@ module.exports = {
           '100%': { opacity: 1 },
         },
         scrollbg: {
-          '0%': { 'background-position': 'left'},
-          '100%': { 'background-position': 'right'}
+          '0%': { 'background-position': 'left' },
+          '100%': { 'background-position': 'right' }
+        },
+        text: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
         },
       },
       invert: {
@@ -57,6 +67,7 @@ module.exports = {
         fadein: "fadein 175ms linear forwards",
         fadeout: "fadeout 175ms linear forwards",
         scrollbg: "scrollbg 180ms linear forwards",
+        text:'text 5s ease infinite',
       }
     },
   },

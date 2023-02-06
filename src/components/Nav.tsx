@@ -48,7 +48,7 @@ const Nav = () => {
         </a>
       </Transition>
       <div className="flex w-full flex-row items-center ">
-        <h1 className={"pb-2 text-6xl font-medium text-violet-400"}>~</h1>
+        <h1 className={"pb-2 text-6xl font-medium text-violet-400 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>~</h1>
         <span className={"flex-grow"} />
         <div
           className={

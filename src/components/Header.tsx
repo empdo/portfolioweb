@@ -26,7 +26,7 @@ const Header = () => {
             interest in programming, math/physics and anything *NIX (Linux,
             Unix) related.
           </p>
-          <p className={"sm:text-xl text-lg text-violet-400"}>
+          <p className={"sm:text-xl text-lg text-violet-400 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>
             Currently working on a basic{" "}
             <a
               className={"underline"}

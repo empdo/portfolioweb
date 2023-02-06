@@ -31,15 +31,15 @@ const Project = (props: {
       leaveFrom="opacity-100"
       leaveTo="opacity-0 block"
     >
-      <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl bg-gradient-to-r from-slate-800 via-gray-800 to-[#3e0652] bg-200% p-5 shadow-2xl hover:animate-scrollbg ">
+      <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl p-5 transition duration-500 shadow-[0px_0px_25px_15px_rgb(0,0,0,0.1)] bg-[#192133] hover:shadow-pink-300 hover:shadow-[0px_0px_2px_1px_rgb(0,0,0,0.1)] group">
         <div className={"flex w-full flex-row items-center pb-3"}>
-          <h2 className={"text-2xl font-medium capitalize text-white"}>
+          <h2 className={"text-2xl font-medium capitalize text-white transition-all group-hover:text-opacity-0 group-hover:animate-text duration-500 bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300"}>
             {props.name}
           </h2>
           <span className={"flex-grow"} />
           <a href={props.url} target={"_blank"} rel={"noreferrer"}>
             <svg
-              className={"h-7 fill-violet-100 hover:fill-violet-300"}
+              className={"h-7 fill-violet-100 hover:fill-gray-300"}
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 496 512"
             >
@@ -51,7 +51,7 @@ const Project = (props: {
         <span className={"flex-grow"} />
         <div className="bottom-0 flex flex-row gap-5 w-full">
           {props.tecs.map((content) => (
-            <p key={content} className={"text-xl text-violet-300"}>
+            <p key={content} className={"text-xl text-purple-300"}>
               {content}
             </p>
           ))}
@@ -69,7 +69,7 @@ const Projects = (props: {
   return (
     <div
       className={
-        "relative z-0 flex min-h-screen flex-col content-start items-center"
+        "relative z-0 flex h-full flex-col content-start justify-center items-center max-w-page"
       }
     >
       <Transition
@@ -83,16 +83,10 @@ const Projects = (props: {
         leaveFrom="opacity-100"
         leaveTo="opacity-0 block"
       >
-        <h1
-          className={"z-0 pb-12 text-5xl font-semibold text-gray-300"}
-          id="projects"
-        >
-          My projects
-        </h1>
       </Transition>
       <div
         className={
-          " z-0  flex flex-wrap content-start items-center justify-center gap-12 p-10 pt-0"
+          " z-0 flex flex-wrap content-start items-center justify-center gap-12 p-10 pt-0"
         }
       >
         {props.projects.map((project, index) => {
@@ -138,15 +132,15 @@ const Projects = (props: {
         leaveTo="opacity-0"
         className="pb-12"
       >
-        <p className={"text-xl text-violet-400"}>
-          Check out my other projects at{" "}
+        <p className={"text-xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>
+          Check out my other projects at my github{" "}
           <a
-            className={"underline"}
+            className="underline"
             target="_blank"
             rel="noreferrer"
-            href="https://github.com/empdo/multiplayergame"
+            href="https://github.com/empdo"
           >
-            my github
+           LiNk IcOn 
           </a>
         </p>
       </Transition>
