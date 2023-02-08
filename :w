@@ -1,0 +1,12 @@
+const Fotter = () => {
+  return (
+  <div className="overflow-hidden relative h-[20vh]">
+    <div className="flex flex-col absolute h-[30vh] gap-1 items-center p-12  w-full bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-pink-800 via-slate-900 to-slate-900 top-0">
+    <p className="text-3xl font-semibold text-gray-200">Emil Essung</p>
+    <p className="text-xl text-gray-400">© Copyright 2023</p>
+    </div>
+  </div>
+  )
+}
+
+export default Fotter;

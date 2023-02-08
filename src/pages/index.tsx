@@ -1,16 +1,14 @@
-import { InferGetStaticPropsType, type NextPage } from "next";
+import type { InferGetStaticPropsType, NextPage } from "next";
 import Head from "next/head";
 import Nav from "../components/Nav";
 import Header from "../components/Header";
-import Projects from "../components/Projects";
 import { useRef } from "react";
-import { ApolloClient, InMemoryCache, createHttpLink, gql } from '@apollo/client';
 import useOnScreen from '../components/useOnScreen';
 
 import { Inter } from '@next/font/google'
 import getClient from "../api";
-import { Transition } from "@headlessui/react";
 import Stuff from "../components/Stuff";
+import Fotter from "../components/Fotter";
 
 const inter = Inter({
   subsets: ['latin'],
@@ -38,9 +36,10 @@ const Home: NextPage<RepType> = ({ repositories }) => {
         </div>
         <section className={"flex flex-col shrink-0 w-full min-h-screen items-center justify-center snap-center"}>
           <div ref={containerRef}>
-           <Stuff show={show} projects={repositories} />
+            <Stuff show={show} projects={repositories} />
           </div>
         </section>
+        <Fotter />
       </div>
     </div>
   );
