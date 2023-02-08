@@ -1,5 +1,7 @@
+import { Transition } from "@headlessui/react";
 import { useState } from "react";
 import type { RepType } from "../pages";
+import Blogs from "./Blogs";
 import Projects from "./Projects";
 
 const Stuff = (props: {
@@ -13,6 +15,18 @@ const Stuff = (props: {
 
   return (
     <div className="flex flex-col items-center min-h-screen pt-10 gap-12">
+
+      <Transition
+        appear={true}
+        show={props.show}
+        unmount={false}
+        enter="transition-opacity duration-1000 delay-300"
+        enterFrom="opacity-0"
+        enterTo="opacity-100"
+        leave="transition-opacity duration-300"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0 block"
+      >
       <div className="flex sm:gap-8 gap-2 items-center justify-baseline">
         <h1
           className={
@@ -34,11 +48,12 @@ const Stuff = (props: {
           Blogs
         </h1>
       </div>
+      </Transition>
 
       {showProjects ?
         (<Projects show={props.show} projects={props.projects} />)
         : 
-        (<></>)
+        (<Blogs/>)
       }
     </div>
   )

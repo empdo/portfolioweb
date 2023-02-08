@@ -17,4 +17,4 @@ const useScrollOffset = () => {
   return scrollOffset;
 }
 
-export default useScrollOffset();
+export default useScrollOffset;

@@ -1,5 +1,6 @@
 import { Transition } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import Link from 'next/link';
 import GitIcon from "./GitIcon";
 import LinkedInIcon from "./LinkedInIcon";
 
@@ -42,17 +43,17 @@ const Nav = () => {
           "fixed top-0 right-0 flex min-h-screen w-2/3 flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl overflow-hidden"
         }
       >
-        <a className={"h-min"} href="#projects">
+        <Link className={"h-min"} href="#projects">
           <img src="./github.svg" alt="git_icon"/>
-        </a>
-        <a className={"h-min"} href="">
+        </Link>
+        <Link className={"h-min"} href="">
           <h2 className={"text-3xl font-semibold text-white"}>Work</h2>
-        </a>
+        </Link>
       </Transition>
       <div className="flex w-full flex-row items-center ">
-      <a href="/">
+      <Link href="/">
         <h1 className={"pb-2 text-6xl font-medium text-violet-400 text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>~</h1>
-        </a>
+        </Link>
         <span className={"flex-grow"} />
         <div
           className={
@@ -81,15 +82,15 @@ const Nav = () => {
           ></span>
         </div>
         <div className={"hidden flex-row gap-6 items-end sm:flex "}>
-          <a className={"h-min"} href="#work">
-            <h2 className={"text-4xl font-bold text-white"}>Work</h2>
-          </a>
-          <a className={"cursor-pointer "} href="https://github.com/empdo">
-            <LinkedInIcon className="h-10 fill-white hover:fill-gray-300"/>
-          </a>
-          <a className={"cursor-pointer "} href="https://github.com/empdo">
-            <GitIcon className="h-10 fill-white hover:fill-gray-300" />
-          </a>
+          <Link className={"h-min"} href="#work">
+            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Work</h2>
+          </Link>
+          <Link className={"cursor-pointer "} href="https://github.com/empdo">
+            <LinkedInIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110"/>
+          </Link>
+          <Link className={"cursor-pointer "} href="https://github.com/empdo">
+            <GitIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110" />
+          </Link>
 
         </div>
       </div>
