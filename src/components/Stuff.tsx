@@ -7,6 +7,7 @@ import Projects from "./Projects";
 const Stuff = (props: {
   show: boolean;
   projects: RepType["repositories"];
+  posts: {slug: string, frontmatter: {[key: string]: any}}[]
 }) => {
 
   const [showProjects, setShowProjects] = useState(true);
@@ -17,7 +18,6 @@ const Stuff = (props: {
     <div className="flex flex-col items-center min-h-screen pt-10 gap-12"
       id="work"
     >
-
       <Transition
         appear={true}
         show={props.show}
@@ -55,7 +55,7 @@ const Stuff = (props: {
       {showProjects ?
         (<Projects show={props.show} projects={props.projects} />)
         : 
-        (<Blogs/>)
+        (<Blogs posts={props.posts}/>)
       }
     </div>
   )

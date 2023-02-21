@@ -12,8 +12,13 @@ let circles: Circle[] = [];
 function getRandomFloat(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
-const distance = (x1: number, y1: number, x2: number, y2: number) =>
-  Math.hypot(x2 - x1, y2 - y1);
+const distance = (x1: number, y1: number, x2: number, y2: number) => {
+  const a = x1 - x2;
+  const b = y1 - y2;
+
+  return Math.sqrt(a * a + b * b);
+
+}
 
 const validPos = (circle: Circle): boolean => {
   let ret = true;
@@ -32,6 +37,7 @@ const addCircle = (radius: number) => {
     let x = getRandomFloat(-1, 1);
     const y =
       getRandomFloat(-1, 1) * Math.sqrt(1 - x * x) * (radius - 3) + radius;
+
     x = x * (radius - 3) + radius;
 
     const circle: Circle = {
@@ -60,12 +66,6 @@ const Animation = () => {
   let canvas: HTMLCanvasElement | null;
   let context: CanvasRenderingContext2D | null;
 
-  const handleResize = () => {
-   // if (!context) return;
-   // draw(context, frameCount);
-   // done = false;
-  };
-
   useEffect(() => {
     canvas = canvasRef.current;
 
@@ -89,12 +89,10 @@ const Animation = () => {
     context.lineWidth = 0.7;
 
 
-    window.addEventListener("resize", handleResize);
-
     context.scale(dpr * 2, dpr * 2);
     canvas.addEventListener("click", onClick, false);
 
-      return () => undefined;
+    return () => undefined;
   }, []);
 
   let frameCount = 0;
@@ -113,19 +111,27 @@ const Animation = () => {
     };
   }, []);
 
-  const onClick = (e: MouseEvent) => {
-    if (!e || !canvas) {
-        return;
-    }
-    const x = e.clientX - canvas.offsetLeft - canvas.clientLeft;
-    const y = e.clientY - canvas.offsetTop - canvas.clientTop;
+  const onClick = (event: MouseEvent) => {
+   // if (!event || !canvas || !context) {
+   //   return;
+   // }
+   // const rect = canvas.getBoundingClientRect();
+   // const x = event.clientX - rect?.left;
+   // const y = event.clientY - rect?.top;
+   // console.log(x, y);
 
-    circles = circles.filter((circle) => {
-        const d = distance(x, y, circle.x, circle.y);
+   // circles = circles.filter((circle) => {
+   //   const d = distance(x, y, circle.x, circle.y);
+   //   if (d < 10) {
+   //     console.log(circle.x, circle.y);
+   //   }
+   //   return d > 50;
+   // })
+   //
 
-        return d > 50;
-    })
-
+    circles = [];
+    frameCount = 0;
+    
     done = false;
   }
 
@@ -140,7 +146,7 @@ const Animation = () => {
     const interval = 40 * growMultiplier - Math.floor(frameCount / 10)
 
     if (frameCount % interval == 0 || interval < 1) {
-        done = addCircle(radius);
+      done = addCircle(radius);
     }
 
     circles.forEach((c) => {
