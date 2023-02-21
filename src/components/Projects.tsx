@@ -65,7 +65,6 @@ const Projects = (props: {
 }) => {
   return (
     <div
-      id="work"
       className={
         "relative z-0 flex h-full flex-col content-start justify-center items-center max-w-page"
       }

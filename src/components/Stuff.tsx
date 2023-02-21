@@ -14,7 +14,9 @@ const Stuff = (props: {
   const textStyle = "z-0 sm:text-5xl text-4xl font-semibold cursor-pointer transition duration-500 ";
 
   return (
-    <div className="flex flex-col items-center min-h-screen pt-10 gap-12">
+    <div className="flex flex-col items-center min-h-screen pt-10 gap-12"
+      id="work"
+    >
 
       <Transition
         appear={true}

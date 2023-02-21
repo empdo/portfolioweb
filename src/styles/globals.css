@@ -5,7 +5,3 @@ html {
 
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --delay: 300ms;
-}
