@@ -82,10 +82,10 @@ const Nav = () => {
           ></span>
         </div>
         <div className={"hidden flex-row gap-6 items-end sm:flex "}>
-          <Link className={"h-min"} href="#work">
+          <Link className={"h-min"} href="#projects">
             <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Work</h2>
           </Link>
-          <Link className={"cursor-pointer "} href="https://github.com/empdo">
+          <Link className={"cursor-pointer "} href="https://www.linkedin.com/in/emil-essung-1b4b21217/">
             <LinkedInIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110"/>
           </Link>
           <Link className={"cursor-pointer "} href="https://github.com/empdo">

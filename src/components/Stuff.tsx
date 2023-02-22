@@ -1,8 +1,9 @@
 import { Transition } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { RepType } from "../pages";
 import Blogs from "./Blogs";
 import Projects from "./Projects";
+import { useRouter } from 'next/router'
 
 const Stuff = (props: {
   show: boolean;
@@ -10,7 +11,15 @@ const Stuff = (props: {
   posts: {slug: string, frontmatter: {[key: string]: any}}[]
 }) => {
 
-  const [showProjects, setShowProjects] = useState(true);
+  const router = useRouter()
+  let key;
+
+  const [showProjects, setShowProjects] = useState(false);
+
+  useEffect(() => {
+    key = router.query.key; 
+    setShowProjects(key === "blog");
+  }, [router.query]);
 
   const textStyle = "z-0 sm:text-5xl text-4xl font-semibold cursor-pointer transition duration-500 ";
 
@@ -29,13 +38,13 @@ const Stuff = (props: {
         leaveFrom="opacity-100"
         leaveTo="opacity-0 block"
       >
-      <div className="flex sm:gap-8 gap-2 items-center justify-baseline">
+      <div className="flex sm:gap-8 gap-4 items-center justify-baseline">
         <h1
           className={
             textStyle
-            + (showProjects ? "underline text-gray-300" : "text-gray-500")
+            + (!showProjects ? "underline text-gray-300" : "text-gray-500")
             } 
-          onClick={() => {setShowProjects(true)}}
+          onClick={() => {setShowProjects(false)}}
           id="projects"
         >
           Projects
@@ -43,9 +52,9 @@ const Stuff = (props: {
         <h1
           className={
             textStyle
-            + (!showProjects ? "underline text-gray-300" : "text-gray-500")
+            + (showProjects ? "underline text-gray-300" : "text-gray-500")
             } 
-            onClick={() => {setShowProjects(false)}}
+            onClick={() => {setShowProjects(true)}}
         >
           Blogs
         </h1>
@@ -53,9 +62,9 @@ const Stuff = (props: {
       </Transition>
 
       {showProjects ?
-        (<Projects show={props.show} projects={props.projects} />)
+        (<Blogs show={props.show} posts={props.posts}/>)
         : 
-        (<Blogs posts={props.posts}/>)
+        (<Projects show={props.show} projects={props.projects} />)
       }
     </div>
   )

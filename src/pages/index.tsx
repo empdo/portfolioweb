@@ -70,7 +70,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       repositories,
-      posts
+      posts,
     }
   }
 }

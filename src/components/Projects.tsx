@@ -22,8 +22,8 @@ const Project = (props: {
 
   return (
     <Transition
-      style={{ "--delay": `${300 + 200 * props.index}ms` }}
-      appear={true}
+    style={{ "--delay": `${50 + 200 * props.index}ms` }}
+    appear={true}
     show={props.show}
     unmount={false}
     enter={`transition duration-1000 delay-[var(--delay)]`}
@@ -109,7 +109,7 @@ const Projects = (props: {
       <Transition
         appear={true}
         show={props.show}
-        enter="transition-opacity duration-[400ms] delay-[2300ms]"
+        enter="transition-opacity duration-[400ms] delay-[1800ms]"
         enterFrom="opacity-0"
         enterTo="opacity-100"
         leave="transition-opacity duration-300"
@@ -125,7 +125,7 @@ const Projects = (props: {
             rel="noreferrer"
             href="https://github.com/empdo"
           >
-            <LinkIcon className="h-6 pl-2 text-white hover:text-gray-300" />
+            <LinkIcon className="h-8 pl-2 text-white hover:text-gray-300" />
           </a>
         </p>
       </Transition>
