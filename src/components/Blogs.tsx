@@ -33,7 +33,7 @@ const Blogs = (props: {
             <h1 className='text-2xl font-bold'>{frontmatter.metaTitle}</h1>
             <p className="text-gray-200 font-semibold pt-1">{frontmatter.description}</p>
           </div>
-          <img className="h-full relative " src={frontmatter.image} alt="ts" />
+          <img className="h-full relative w-full sm:inline hidden" src={frontmatter.image} alt="ts" />
 
         </Link>
       ))}
