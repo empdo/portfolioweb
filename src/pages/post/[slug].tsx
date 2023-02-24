@@ -98,7 +98,7 @@ mdxSource:  MDXRemoteSerializeResult<Record<string, unknown>, Record<string, str
         </Link>
       </div>
 
-        <div className='2xl:fixed block h-full top-0 bottom-0 left-12 pb-4'>
+        <div className='xl:fixed block h-full top-0 bottom-0 left-8'>
         <ol className='list-inside list-decimal justify-center flex flex-col align-center h-full'>
         <h1 className='text-xl mb-3 font-bold '>Table of content</h1>
           {
