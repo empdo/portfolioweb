@@ -1,4 +1,4 @@
-import {RefObject, useEffect, useRef, useState} from "react";
+import {type RefObject, useEffect, useRef, useState} from "react";
 
 function useOnScreen(ref: RefObject<HTMLElement>) {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -7,11 +7,10 @@ function useOnScreen(ref: RefObject<HTMLElement>) {
   useEffect(() => {
     observerRef.current = new IntersectionObserver(([entry]) => {
       if (!entry) return;
-      console.log(entry.isIntersecting);
       setIsOnScreen(entry.isIntersecting)
     },{
         root: null,
-        rootMargin: "0px",
+        rootMargin: "0px 0px -25% 0px",
         threshold: 0.1,
       }
     );

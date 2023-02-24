@@ -117,7 +117,7 @@ const Projects = (props: {
         leaveTo="opacity-0"
         className="pb-12"
       >
-        <p className={"flex flex-row items-center text-xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text"}>
+        <p className={"flex flex-row items-center text-xl text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300 animate-text sm:max-w-page max-w-xs"}>
           Check out my other projects at my github{" "}
           <a
             className="underline"

@@ -43,12 +43,17 @@ const Nav = () => {
           "fixed top-0 right-0 flex min-h-screen w-2/3 flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl overflow-hidden"
         }
       >
-        <Link className={"h-min"} href="#work">
-          <img src="./github.svg" alt="git_icon"/>
+        <Link className={"h-min"} href="/#work">
+          <h2 className={"text-4xl font-bold text-white"}>Work</h2>
         </Link>
-        <Link className={"h-min"} href="">
-          <h2 className={"text-3xl font-semibold text-white"}>Work</h2>
+        <div className="flex flex-row gap-5">
+        <Link className={"cursor-pointer "} href="https://github.com/empdo">
+          <GitIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110" />
         </Link>
+        <Link className={"cursor-pointer "} href="https://www.linkedin.com/in/emil-essung-1b4b21217/">
+          <LinkedInIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110"/>
+        </Link>
+        </div>
       </Transition>
       <div className="flex w-full flex-row items-center ">
       <Link href="/">

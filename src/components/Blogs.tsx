@@ -1,7 +1,7 @@
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "../pages";
+import type { Post } from "../pages";
 
 const Blogs = (props: {
   show: boolean,
@@ -26,14 +26,16 @@ const Blogs = (props: {
         <Link 
           href={`/post/${slug}`}
           key={slug}
-          className='max-w-lg max-h-52 w-full m-2 rounded-xl overflow-hidden flex flex-row justify-between items-start hover:bg-slate-800'
+          className='max-w-2xl max-h-max sm:min-h-[13em] w-full m-4 rounded-xl overflow-hidden flex flex-row justify-between items-start hover:bg-slate-800'
         >
-          <div className="flex flex-col justify-end items-start h-full p-4">
+          <div className="flex flex-col justify-end items-start h-full p-4 flex-[4]">
             <p className="text-gray-400 font-semibold">{frontmatter.date}</p>
             <h1 className='text-2xl font-bold'>{frontmatter.metaTitle}</h1>
             <p className="text-gray-200 font-semibold pt-1">{frontmatter.description}</p>
           </div>
-          <img className="h-full relative w-full sm:inline hidden" src={frontmatter.image} alt="ts" />
+          <div className="h-full w-full relative sm:inline hidden flex-[3]">
+            <Image style={{"objectFit": "cover"}} fill={true} src={frontmatter.image} alt="ts" />
+          </div>
 
         </Link>
       ))}
