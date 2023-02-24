@@ -43,7 +43,7 @@ const Nav = () => {
           "fixed top-0 right-0 flex min-h-screen w-2/3 flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl overflow-hidden"
         }
       >
-        <Link className={"h-min"} href="#projects">
+        <Link className={"h-min"} href="#work">
           <img src="./github.svg" alt="git_icon"/>
         </Link>
         <Link className={"h-min"} href="">
@@ -82,7 +82,7 @@ const Nav = () => {
           ></span>
         </div>
         <div className={"hidden flex-row gap-6 items-end sm:flex "}>
-          <Link className={"h-min"} href="#projects">
+          <Link className={"h-min"} href="#work">
             <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Work</h2>
           </Link>
           <Link className={"cursor-pointer "} href="https://www.linkedin.com/in/emil-essung-1b4b21217/">

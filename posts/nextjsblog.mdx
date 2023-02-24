@@ -1,0 +1,188 @@
+---
+title: 'Writing blogs with Next js and mdx'
+metaTitle: "Next js blogs with mdx"
+date: '2023-02-26'
+image: "/portfolioanim.gif"
+description: "A simple overview on creating a blog website with with next js."
+---
+
+A simple overview on one way to create a blog website with Next js and mdx.
+
+<h2 id="blä1">Project structure</h2>
+<div id="blä1">
+ 
+The structure of the project will look like following:
+```
+.
+├── src/
+│   └── pages/
+│       ├── post/
+│       │   └── [slug].tsx
+│       ├── _app.tsx
+│       └── index.tsx
+└── posts/
+    └── blogpost1.mdx
+    └── blogpost2.mdx
+```
+
+By creating a slug file in src/pages/post/ each blog post can accessed with the parameter "pageurl/post/postslug".
+
+The blog posts will be saved in the posts directory with the mdx file format. 
+
+Each mdx have the following structure:
+
+```
+---
+title: 'title'
+metaTitle: 'meta title'
+date: 'yyyy-mm-dd'
+image: "image path"
+---
+
+The content of the blog
+```
+
+The first section, wrapped in "---", is called the front matter section. It contains the meta data of your blog, the meta data can consist of whatever you like. The front matter section will be followed by the content of you blog.
+
+
+</div>
+<h2 id="listing-blogs">Listing the blog posts</h2>
+<div id="listing-blogs">
+In your index file a getStaticProps function can be created to read the files in the "posts" directory.
+
+First the packages fs and matter have to be imported, like this:
+
+```typescript
+import matter from 'gray-matter';
+import fs from 'fs';
+```
+The gray matter package will be responsible for reading the front matter section of your blog and the fs package for reading the content of your posts folder.
+
+With the fs package, an array of the posts can be read with the readdir function.
+
+```typescript
+  const files = fs.readdirSync('posts');
+```
+
+An array with an object of each posts slug and front matter can then be created from the array of posts using the matter function from the gray matter package.
+
+```typescript
+  const posts = files.map((fileName) => {
+    const slug = fileName.replace('.mdx', '');
+    const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+    const { data: frontmatter } = matter(readFile);
+
+    return {
+      slug,
+      frontmatter,
+    };
+  });
+```
+
+The entire function will look like this:
+
+```typescript
+export const getStaticProps = async () => {
+  const files = fs.readdirSync('posts');
+
+  const posts = files.map((fileName) => {
+    const slug = fileName.replace('.mdx', '');
+    const readFile = fs.readFileSync(`posts/${fileName}`, 'utf-8');
+    const { data: frontmatter } = matter(readFile);
+
+    return {
+      slug,
+      frontmatter,
+    };
+  });
+
+  return {
+    props: {
+      posts,
+    }
+  }
+}
+```
+
+Within the main function of the index file the posts can taken in as a prop. By using the map function the posts can be iterated through and be returned as an array of jsx objects. With each object containing the posts title, date and image.
+
+```typescript
+export type RepType = InferGetStaticPropsType<typeof getStaticProps>;
+
+const Home: NextPage<RepType> = ({ posts }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const show = useOnScreen(containerRef);
+
+return (
+  {posts.map(({ slug, frontmatter }) => (
+    <div key={slug} >
+      <Link href={`/post/${slug}`} className="flex flex-col justify-end items-start h-full p-4">
+        <p>{frontmatter.date}</p>
+          <h1 className='text-2xl font-bold'>{frontmatter.metaTitle}</h1>
+          </Link>
+        <img className="h-full" src={frontmatter.image} alt="ts"/>
+      </div>
+    ))}
+  );
+};
+```
+
+Each post will be wrapped with a Link tag with a href of "post/postslug" that routes the user to the blog post if pressed.
+
+
+</div>
+<h2 id="view-blog">Viewing each blog post</h2>
+<div id="view-blog">
+With the slug file being placed in the "/src/pages/post/" directory, the slug file will return the content on the website for the "siteurl/post" url.
+
+The packages needed for the slug file are, fs, gray-matter and next-mdx-remote. Next-mdx-remote is responsible for displaying the markdown, it can be imported like this.
+
+```typescript
+import { MDXRemote } from 'next-mdx-remote'
+import { serialize } from 'next-mdx-remote/serialize'
+```
+
+Within the slug file we can create a getStaticProps component that can recive the blog slug as a parameter. Like this:
+
+```typescript
+export const getStaticProps: GetStaticProps = (context) => {
+  const { slug } = context.params as IParams;
+}
+```
+
+With the slug we can with the fs package get the correct blog post file from the posts directory. With the matter function, the frontmatter information can be recived and with the serialize function from next-mdx-remote the markdown can be parsed to a format that can be displayed with the jsx component MDXRemote. The final function would look like this.
+
+```typescript
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { slug } = context.params as IParams;
+
+  const fileName = fs.readFileSync(`posts/${slug}.mdx`, 'utf-8');
+  const { data: frontmatter, content } = matter(fileName);
+  const mdxSource = await serialize(content);
+
+  return {
+    props: {
+      frontmatter,
+      mdxSource,
+    },
+  };
+}
+```
+
+To display the content of the blog post a functional component can created that takes in the frontmatter information and the mdx source. The frontmatter information can be displayed as wished, in this example the title is added before the content. The content of the page, the mdx source can be displayed with the MDXRemote component, passing in the mdx source. If you are using tailwind, the content can be automaticly styled by passing prose, and prose-invert if the page is in darkmode, to the parent component of the MDXRemote.
+
+```typescript
+const Page = ({ frontmatter, mdxSource, posts }) => {
+  return (
+    <div className='flex flex-col items-start sm:mx-auto mx-4 max-w-screen-sm'>
+            <div className='prose prose-invert pb-12 w-full' ref={contentRef}>
+                <h1>{frontmatter.title}</h1>
+                <MDXRemote {...mdxSource} />
+            </div>
+        </div>
+  );
+}
+
+export default Page;
+```
+</div>

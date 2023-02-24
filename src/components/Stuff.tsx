@@ -1,6 +1,6 @@
 import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
-import type { RepType } from "../pages";
+import type { Post, RepType } from "../pages";
 import Blogs from "./Blogs";
 import Projects from "./Projects";
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 const Stuff = (props: {
   show: boolean;
   projects: RepType["repositories"];
-  posts: {slug: string, frontmatter: {[key: string]: any}}[]
+  posts: { slug: string, frontmatter: Post}[];
 }) => {
 
   const router = useRouter()
@@ -24,7 +24,7 @@ const Stuff = (props: {
   const textStyle = "z-0 sm:text-5xl text-4xl font-semibold cursor-pointer transition duration-500 ";
 
   return (
-    <div className="flex flex-col items-center min-h-screen pt-10 gap-12"
+    <div className="flex flex-col items-center pt-10 gap-12 min-h-screen"
       id="work"
     >
       <Transition

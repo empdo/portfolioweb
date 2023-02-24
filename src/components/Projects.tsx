@@ -125,7 +125,7 @@ const Projects = (props: {
             rel="noreferrer"
             href="https://github.com/empdo"
           >
-            <LinkIcon className="h-8 pl-2 text-white hover:text-gray-300" />
+            <LinkIcon className="h-6 pl-2 text-white hover:text-gray-300" />
           </a>
         </p>
       </Transition>

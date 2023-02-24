@@ -1,38 +1,42 @@
 import { Transition } from "@headlessui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { Post } from "../pages";
 
 const Blogs = (props: {
   show: boolean,
-  posts: { slug: string, frontmatter: { [key: string]: any } }[]
+  posts: { slug: string, frontmatter: Post}[]
 }
 ) => {
+
+  const posts = props.posts.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+
   return (
     <Transition
       appear={true}
       show={props.show}
       unmount={false}
       as="header"
-      enter={`transition duration-500 delay-300`}
+      enter="transition-opacity duration-1000 delay-300"
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
       className="flex flex-row flex-wrap h-full w-full justify-center "
     >
-      {props.posts.map(({ slug, frontmatter }) => (
-        <div
+      {posts.map(({ slug, frontmatter }) => (
+        <Link 
+          href={`/post/${slug}`}
           key={slug}
-          className='max-w-lg max-h-52 w-full m-2 rounded-xl overflow-hidden flex flex-row justify-between items-start hover:shadow-[0px_0px_15px_10px_rgb(0,0,0,0.15)]'
+          className='max-w-lg max-h-52 w-full m-2 rounded-xl overflow-hidden flex flex-row justify-between items-start hover:bg-slate-800'
         >
-        <Link href={`/post/${slug}`} className="flex flex-col justify-end items-start h-full p-4">
-            <p>{frontmatter.date}</p>
+          <div className="flex flex-col justify-end items-start h-full p-4">
+            <p className="text-gray-400 font-semibold">{frontmatter.date}</p>
             <h1 className='text-2xl font-bold'>{frontmatter.metaTitle}</h1>
+            <p className="text-gray-200 font-semibold pt-1">{frontmatter.description}</p>
+          </div>
+          <img className="h-full relative " src={frontmatter.image} alt="ts" />
+
         </Link>
-        <img className="h-full" src={frontmatter.image} alt="ts"/>
-
-
-        </div>
       ))}
-      <br/>
     </Transition>
   )
 }
