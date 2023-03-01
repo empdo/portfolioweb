@@ -43,9 +43,12 @@ const Nav = () => {
           "fixed top-0 right-0 flex min-h-screen w-2/3 flex-col items-center justify-center gap-10 bg-slate-900 shadow-2xl overflow-hidden"
         }
       >
-        <Link className={"h-min"} href="/#work">
-          <h2 className={"text-4xl font-bold text-white"}>Work</h2>
-        </Link>
+          <Link className={"h-min"} href="/#work">
+            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Projects</h2>
+          </Link>
+      <Link href="/?key=blog#work" className="h-min">
+            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Blogs</h2>
+          </Link>
         <div className="flex flex-row gap-5">
         <Link className={"cursor-pointer "} href="https://github.com/empdo">
           <GitIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110" />
@@ -87,8 +90,11 @@ const Nav = () => {
           ></span>
         </div>
         <div className={"hidden flex-row gap-6 items-end sm:flex "}>
-          <Link className={"h-min"} href="#work">
-            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Work</h2>
+          <Link className={"h-min"} href="/#work">
+            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Projects</h2>
+          </Link>
+      <Link href="/?key=blog#work" className="h-min">
+            <h2 className={"text-4xl font-bold text-white hover:text-gray-300 transition duration-110"}>Blogs</h2>
           </Link>
           <Link className={"cursor-pointer "} href="https://www.linkedin.com/in/emil-essung-1b4b21217/">
             <LinkedInIcon className="h-10 fill-white hover:fill-gray-300 transition duration-110"/>

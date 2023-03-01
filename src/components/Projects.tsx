@@ -24,16 +24,16 @@ const Project = (props: {
     <Transition
     style={{ "--delay": `${50 + 200 * props.index}ms` }}
     appear={true}
-    show={props.show}
+    show={props.show} 
     unmount={false}
     enter={`transition duration-1000 delay-[var(--delay)]`}
-    enterFrom="opacity-0 translate-y-40"
+    enterFrom="opacity-0 translate-y-40 "
     enterTo="opacity-100 translate-y-0"
     leave={`transition duration-200`}
     leaveFrom="opacity-100"
     leaveTo="opacity-0 block"
   >
-    <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl p-5 transition duration-500 shadow-[0px_0px_15px_10px_rgb(0,0,0,0.05)] bg-[#192133] hover:shadow-pink-300 hover:shadow-[0px_0px_2px_1px_rgb(0,0,0,0.1)] group">
+    <div className="flex min-h-md w-full min-w-[20rem] max-w-xs flex-col items-start rounded-xl p-5 transition duration-500 shadow-[0px_0px_5px_1px_rgb(0,0,0,0.05)] bg-[#192133] hover:shadow-pink-300 hover:shadow-[0px_0px_2px_1px_rgb(0,0,0,0.1)] group">
       <div className={"flex w-full flex-row items-center pb-3"}>
         <h2 className={"text-2xl font-medium capitalize text-white transition-all group-hover:text-opacity-0 group-hover:animate-text duration-500 bg-clip-text bg-gradient-to-r from-purple-300 via-pink-400 to-purple-300"}>
           {props.name}

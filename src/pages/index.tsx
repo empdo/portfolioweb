@@ -39,7 +39,7 @@ const Home: NextPage<RepType> = ({ repositories, posts }) => {
         </div>
         <div className={"flex flex-col shrink-0 w-full min-h-screen items-center justify-center snap-start"}>
           <div ref={containerRef}>
-            <Stuff show={show} projects={repositories} posts={posts} />
+            <Stuff show={show || typeof window !== 'undefined' && window.innerWidth < 500} projects={repositories} posts={posts} />
           </div>
         </div>
         <Fotter />
