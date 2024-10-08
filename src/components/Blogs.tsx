@@ -20,7 +20,7 @@ const Blogs = (props: {
       enter="transition-opacity duration-1000 delay-300"
       enterFrom="opacity-0 opacity-0"
       enterTo="opacity-100 opacity-100"
-      className="flex flex-row flex-wrap h-full w-full justify-center "
+      className="flex flex-row flex-wrap h-full w-full justify-center flex-col "
     >
       {posts.map(({ slug, frontmatter }) => (
         <Link 
@@ -33,7 +33,7 @@ const Blogs = (props: {
             <h1 className='text-2xl font-bold'>{frontmatter.metaTitle}</h1>
             <p className="text-gray-200 font-semibold pt-1">{frontmatter.description}</p>
           </div>
-          <div className="h-full w-full relative sm:inline hidden flex-[3]">
+          <div className="h-full w-full relative sm:inline hidden flex-[3] min-h-[13em]">
             <Image style={{"objectFit": "cover"}} fill={true} src={frontmatter.image} alt="ts" />
           </div>
 
